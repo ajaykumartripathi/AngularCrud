@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sign Up</h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <a href="https://www.facebook.com/login" target="_blank"><span><i class="fab fa-facebook-square"></i></span></a>
+                        <a href="https://www.google.com/login" target="_blank"><span><i class="fab fa-google-plus-square"></i></span></a>
+                        <a href="https://twitter.com/login" target="_blank"><span><i class="fab fa-twitter-square"></i></span></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]='signup' (ngSubmit)="onSubmit()">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" class="form-control" formControlName="firstname"
+                                    placeholder="first name">
+                            </div>
+
+                            <span *ngIf="signup.controls.firstname.errors?.required && submitted " class="sp">**Please
+                                enter first name.</span>
+                                <span *ngIf="signup.controls.firstname.errors?.maxlength" class="sp">**name should be
+                                    maximum 10 character.</span>   
+                            <span *ngIf="signup.controls.firstname.errors?.pattern" class="sp">**name should be only
+                                character.</span>
+                            <span *ngIf="signup.controls.firstname.errors?.minlength" class="sp">**name should be
+                                minimum 3 character.</span>
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" class="form-control" formControlName="lastname"
+                                    placeholder="last name">
+                            </div>
+                            <span *ngIf="signup.controls.lastname.errors?.required && submitted " class="sp">**Please
+                                enter last name.</span>
+                            <span *ngIf="signup.controls.lastname.errors?.minlength" class="sp">**name should be minimum
+                                3 character.</span>
+                            <span *ngIf="signup.controls.lastname.errors?.maxlength" class="sp">**name should be maximum
+                                10 character.</span>
+                            <span *ngIf="signup.controls.lastname.errors?.pattern" class="sp">**lastname should be only
+                                character.</span>
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-envelope"></i></span>
+                                <input type="text" class="form-control" formControlName="email" placeholder="email">
+                            </div>
+                            <span *ngIf="signup.controls.email.errors?.required && submitted " class="sp">**Please enter
+                                email id.</span>
+                            <span *ngIf="signup.controls.email.errors?.pattern" class="sp">**enter valid email id</span>
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                <!-- <input type="number" class="form-control" formControlName="phone"
+                                    placeholder="phone number"> -->
+                                    <ngx-intl-tel-input
+                                    [cssClass]="'custom'"
+                                    [preferredCountries]="[CountryISO.UnitedStates, CountryISO.UnitedKingdom]"
+                                    [enableAutoCountrySelect]="false"
+                                    [enablePlaceholder]="true"
+                                    [searchCountryFlag]="true"
+                                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                    [selectFirstCountry]="false"
+                                    [selectedCountryISO]="CountryISO.India"
+                    
+                                    [phoneValidation]="true"
+                                    
+                                    name="phone"
+                                    formControlName="phone"
+	                                ></ngx-intl-tel-input>
+                            </div>
+                            <span *ngIf="signup.controls.phone.errors?.required && submitted " class="sp">**Please enter
+                                phone number.</span>
+                            <span *ngIf="signup.controls.phone.errors?.validatePhoneNumber" class="sp">**enter valid phone
+                                number</span>
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                <input type="password" class="form-control" formControlName="password"
+                                    placeholder="password">
+                            </div>
+                            <span *ngIf="signup.controls.password.errors?.required && submitted " class="sp">**Please
+                                enter your password.</span>
+                            <span *ngIf="signup.controls.password.errors?.pattern" class="sp">**please enter atleast one
+                                upper one lower and one special character</span>
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                <input type="password" class="form-control" formControlName="confirmPassword"
+                                    placeholder="confirm password">
+                            </div>
+                            <span *ngIf="signup.controls.confirmPassword.errors?.required && submitted "
+                                class="sp">**Please enter confirm password.</span>
+                            <span *ngIf="signup.controls.confirmPassword.errors?.confirmedValidator"
+                                class="sp">**password and confirm password not match</span>
+                        </div>
+                        <!-- <div class="row align-items-center remember">
+                            <input type="checkbox">Remember Me
+                        </div> -->
+                        <div class="form-group">
+                            <input type="submit" value="Sign up" class="btn float-right login_btn">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        if you have account?<a routerLink="/login">Login</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+

@@ -24,6 +24,8 @@ tr{
 
  .col1{
  padding: 40px;
+ margin-top: 20px;
+ 
  background-color: rgb(189, 216, 181);
 }/*
 .col-md-8{
@@ -199,4 +201,10 @@ table.table .avatar {
     float: left;
     margin-top: 10px;
     font-size: 13px;
+}
+/* .form-group{
+    width: 150px;
+} */
+.header{
+    margin-left: 300px;
 }

@@ -1,0 +1,18 @@
+<div class="col1 container-fluid">
+    <form [formGroup]='editform' (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input type="text" class="form-control"  placeholder="first name" formControlName='firstname' >
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control"  placeholder="last name"  formControlName='lastname'>
+      </div>
+      <div class="form-group">
+        <input type="email" class="form-control"  placeholder="email"  formControlName='email'>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" placeholder="phone number"  formControlName="phone">
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+

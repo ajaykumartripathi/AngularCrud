@@ -5,6 +5,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import swal from 'sweetalert2';
 import{Router} from '@angular/router'
 import { NgxSpinnerService } from 'ngx-spinner';
+import { constant } from 'src/app/core/const';
+import { ApiUrl } from 'src/app/core/api';
+import { HttpService } from 'src/app/core/service/http.service';
+import { UserService } from 'src/app/core/service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +23,9 @@ export class LoginComponent implements OnInit {
     private fb:FormBuilder,
     private httpx:HttpClient,
     private router:Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private httpservice:HttpService,
+    private userservice:UserService
   ) { }
 
   ngOnInit(): void {
@@ -34,8 +40,8 @@ export class LoginComponent implements OnInit {
 
   initForm(){
     this.login=this.fb.group({
-      email:['',[Validators.required,Validators.email,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
-      password:['',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gm)]],
+      email:['',[Validators.required,Validators.email,Validators.pattern(constant.EMAIL)]],
+      password:['',[Validators.required,Validators.pattern(constant.PASSWORD)]],
       })
   }
   
@@ -45,7 +51,7 @@ export class LoginComponent implements OnInit {
     this.submitted=true;
     if(!this.login.invalid){
       console.log(this.login.value);
-      this.httpx.post('http://localhost:9000/login', this.login.value).subscribe((res:any) => {
+      this.httpservice.postData(ApiUrl.apiUrl.login, this.login.value).subscribe((res:any) => {
         // console.log(res);
         //alert(res.message);
         this.spinner.show();
@@ -59,8 +65,10 @@ export class LoginComponent implements OnInit {
           text: res.message,
           showConfirmButton: true,
       })
+      console.log(res.data)
+      localStorage.setItem('usersdata',JSON.stringify(res))
         this.router.navigateByUrl('/layout');
-        
+        this.userservice.setData(res.data[0])
       },err => {
         console.log(err);
         //alert(err.error.message);

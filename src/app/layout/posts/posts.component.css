@@ -20,7 +20,11 @@ body{
    
 
 }
-
+.pencil{
+    margin-left: -25px;
+    border: none;
+    background-color:rgb(231, 227, 227);
+}
 
 .icon{
     /* background-color: rgb(241, 222, 222); */
@@ -56,7 +60,11 @@ body{
     width: 400px;
 }
 .col1{
-    margin-top: 60px;
+    margin-top: 80px;
+    margin-right: 35px;
+}
+.col2{
+    margin-top: 60px!important;
 }
 .tbl{
     background-color:rgb(238, 204, 204);
